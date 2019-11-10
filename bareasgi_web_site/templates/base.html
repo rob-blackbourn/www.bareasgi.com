@@ -19,29 +19,26 @@
 <body>
 
     <header class="mui-appbar mui--z1">
-        <div class="mui-container">
-            <table>
-                <tr class="mui--appbar-height">
-                    <td class="mui--text-title">
-                        <a href="/">
-                            <img
-                                src="/assets/peach.svg"
-                                alt="It's a peach"
-                                width="32px" height="32px"
-                            />
+        <div class="mui-container" >
+            <br>
+            <span class="mui--pull-left">
+                <a href="/">
+                    <img
+                        src="/assets/peach.svg"
+                        alt="It's a peach"
+                        width="32px" height="32px"
+                    />
+                </a>
+            </span>
+            <span class="mui--pull-right">
+                <ul class="mui-list--inline mui--text-body2">
+                    <li>
+                        <a href="/tutorial/docs/table-of-contents.md">
+                            tutorial
                         </a>
-                    </td>
-                    <td align="mui--text-right">
-                        <ul class="mui-list--inline mui--text-body2">
-                            <li>
-                                <a href="/tutorial/docs/table-of-contents.md">
-                                    tutorial
-                                </a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
+                    </li>
+                </ul>
+            </span>
         </div>
     </header>
     {% block content %}

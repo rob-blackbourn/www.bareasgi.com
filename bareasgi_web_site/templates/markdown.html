@@ -3,9 +3,13 @@
 {% set title = "Blog" %}
 
 {% block content %}
-<div class="mui-container-fluid">
-    <div class="mui-panel">
-        {{md_html}}
+<div id="content-wrapper">
+    <div class="mui-container-fluid">
+        <div class="mui--appbar-height"></div>
+
+        <div class="mui-panel">
+            {{md_html}}
+        </div>
     </div>
 </div>
 {% endblock %}
