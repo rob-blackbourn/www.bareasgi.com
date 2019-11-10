@@ -1,0 +1,35 @@
+app:
+    host: 0.0.0.0
+    port: 10101
+    ssl:
+      enabled: true
+      certfile: ${HOME}/.keys/server.crt
+      keyfile: ${HOME}/.keys/server.key
+    docs:
+        - ${HOME}/Development/Public/bareASGI-tutorial
+
+logging:
+    version: 1
+    formatters:
+        simple:
+            format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    handlers:
+        stdout:
+            class: logging.StreamHandler
+            formatter: simple
+            stream: ext://sys.stdout
+    loggers:
+        bareasgi_web_site:
+            level: DEBUG
+            handlers:
+                - stdout
+            propagate: false
+        bareasgi:
+            level: DEBUG
+            handlers:
+                - stdout
+            propagate: false
+    root:
+        level: DEBUG
+        handlers:
+            - stdout
