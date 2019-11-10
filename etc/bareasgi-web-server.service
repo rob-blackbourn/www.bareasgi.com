@@ -1,0 +1,15 @@
+[Unit]
+Description=The bareasgi.com web site
+After=syslog.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/dev/www.bareasgi.com
+ExecStart=/home/ubuntu/dev/www.bareasgi.com/.venv/bin/start
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
