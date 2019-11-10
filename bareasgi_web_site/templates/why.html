@@ -25,7 +25,7 @@
 
             <p>
                 An example of the light touch of the framework is in the way
-                it receives requests. There is no attempt to pre process the
+                it presents requests. There is no attempt to pre process the
                 request.
                 For example many frameworks help the user by packing headers into
                 a dictionary, but if your handler doesn't use the headers, the
@@ -33,18 +33,21 @@
             </p>
 
             <p>
-                Extension packages are available to provide the functionality
-                that is built in to other frameworks, e.g.: static file 
-                serving, CORS, jinja2 templating, compression, GraphQL, etc.
-                These are all optional.
+                A key consequence of the design is the support for asynchronous
+                streaming of both input and output. This was something that was
+                clumsy to achieve before the async-await functionality. This is
+                an aspect of web servers that has not been widely explored.
+                There is an example of this in the streaming GraphQL subscriber
+                that has no need of a WebSocket.
             </p>
 
             <p>
-                A key consequence of the design is the support for asynchronous
-                streaming of both input and output. This was something that was
-                clumsy to achieve before the async-await functionality.
-            </p>
-        </div>
+                    Extension packages are available to provide the functionality
+                    that is built in to other frameworks, e.g.: static file 
+                    serving, CORS, jinja2 templating, compression, GraphQL, etc.
+                    These are all optional.
+                </p>
+            </div>
     </div>
 </div>
 {% endblock %}
