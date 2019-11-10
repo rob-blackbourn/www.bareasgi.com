@@ -3,10 +3,10 @@ app:
     port: 10101
     ssl:
       enabled: true
-      certfile: ${HOME}/.keys/server.crt
-      keyfile: ${HOME}/.keys/server.key
+      certfile: ${HOME}/.keys/cert.pem
+      keyfile: ${HOME}/.keys/privkey.pem
     docs:
-        - ${HOME}/Development/Public/bareASGI-tutorial
+        - ${HOME}/dev/bareASGI-tutorial
 
 logging:
     version: 1

@@ -59,12 +59,14 @@ def _start_hypercorn(app: Application, config: Dict[str, Any]) -> None:
 
 def start_server():
     """Start the server"""
-    config = _load_config(
-        pkg_resources.resource_filename(__name__, "config.yml")
-    )
+    config_path = pkg_resources.resource_filename(__name__, "config.yml")
+    config = _load_config(config_path)
 
     _initialise_logging(config)
-    app = create_application(config['app'])
+
+    assets_path = pkg_resources.resource_filename(__name__, "assets")
+    app = create_application(config['app'], assets_path)
+
     _start_hypercorn(app, config['app'])
 
 
