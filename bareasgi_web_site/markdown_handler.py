@@ -2,7 +2,9 @@
 
 import os.path
 import logging
+from typing import List, Optional
 
+import aiofiles
 from bareasgi import (
     Scope,
     Info,
@@ -16,6 +18,21 @@ from markdown import markdown
 LOGGER = logging.getLogger(__name__)
 
 
+async def _get_document(
+        path: str,
+        doc_folders: List[str]
+) -> Optional[str]:
+    for folder in doc_folders:
+        full_path = os.path.join(folder, path)
+        if os.path.exists(full_path):
+            break
+    else:
+        return None
+
+    async with aiofiles.open(full_path, 'rt') as file_ptr:
+        return await file_ptr.read()
+
+
 async def get_markdown(
         _scope: Scope,
         info: Info,
@@ -25,27 +42,19 @@ async def get_markdown(
     """A request handler"""
     try:
         config = info['config']
-        docs_folders = [os.path.expandvars(path) for path in config['docs']]
+        doc_folders = [os.path.expandvars(path) for path in config['docs']]
         path = matches['docs']
-        for folder in docs_folders:
-            full_path = os.path.join(folder, path)
-            if os.path.exists(full_path):
-                break
-        else:
-            return 404
-
-        with open(full_path, 'rt') as file_ptr:
-            text = file_ptr.read()
-            if not full_path.endswith('.md'):
-                text = f"""
+        text = await _get_document(path, doc_folders)
+        if not path.endswith('.md'):
+            text = f"""
 # {path}
 
 ```
 {text}
 ```
 """
-            md = markdown(text, extensions=['extra', 'codehilite'])
-            md_html = markdown(md)
+        md_text = markdown(text, extensions=['extra', 'codehilite'])
+        md_html = markdown(md_text)
 
         html = f"""
 <!DOCTYPE html>
@@ -53,13 +62,7 @@ async def get_markdown(
   <head>
     <meta charset="utf-8">
     <title>bareASGI</title>
-    <!--
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="/assets/codehilite.css">
-    -->
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">    
     <link href="//cdn.muicss.com/mui-0.10.0/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.10.0/js/mui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/codehilite.css">
@@ -74,5 +77,5 @@ async def get_markdown(
 </html>
 """
         return 200, [(b'content-type', b'text/html')], text_writer(html)
-    except:  # pylint: disable=bare-except
+    except Exception as error:  # pylint: disable=bare-except
         return 500
