@@ -7,6 +7,7 @@ from bareasgi import Application
 from bareasgi_static import add_static_file_provider
 
 from .markdown_handler import get_markdown
+from .front_page import get_frontpage
 
 LOGGER = logging.getLogger(__name__)
 
@@ -22,6 +23,7 @@ def create_application(
     }
     app = Application(info=info)
 
+    app.http_router.add({'GET'}, '/', get_frontpage)
     app.http_router.add({'GET'}, '/tutorial/{docs:path}', get_markdown)
 
     add_static_file_provider(
