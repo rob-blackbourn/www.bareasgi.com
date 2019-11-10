@@ -52,7 +52,7 @@ async def get_markdown(
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hypercorn http</title>
+    <title>bareASGI</title>
     <!--
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
@@ -65,7 +65,7 @@ async def get_markdown(
     <link rel="stylesheet" type="text/css" href="/assets/codehilite.css">
   </head>
   <body>
-    <div class="mui-container">
+    <div class="mui-container-fluid">
       <div class="mui-panel">
         {md_html}
       </div>
