@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{title}}</title>
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">    
+    <link href="//cdn.muicss.com/mui-0.10.0/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.10.0/js/mui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/mui-style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/codehilite.css">
+
+    {% endblock %}
+</head>
+<body>
+
+    <header class="mui-appbar mui--z1">
+        <div class="mui-container">
+            <table>
+                <tr class="mui--appbar-height">
+                    <td class="mui--text-title">
+                        <a href="/">
+                            <img
+                                src="/assets/peach.svg"
+                                alt="It's a peach"
+                                width="32px" height="32px"
+                            />
+                        </a>
+                    </td>
+                    <td align="mui--text-right">
+                        <ul class="mui-list--inline mui--text-body2">
+                            <li>
+                                <a href="/tutorial/docs/table-of-contents.md">
+                                    tutorial
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <div class="mui-container mui--text-center">
+            Powered by bareASGI!
+        </div>
+    </footer>
+          
+
+</body>
+</html>

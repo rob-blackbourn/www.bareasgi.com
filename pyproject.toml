@@ -20,6 +20,7 @@ markdown = "^3.1"
 bareasgi = "^3.4"
 pygments = "^2.4"
 bareasgi-static = "^3.0"
+bareasgi-jinja2 = "^3.1"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.740.0"
